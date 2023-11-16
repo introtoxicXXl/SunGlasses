@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom';
 import SocialLogin from './SocialLogin';
 import { Helmet } from 'react-helmet-async';
 import useAuth from './../../Hooks/useAuth';
+import { updateProfile } from 'firebase/auth';
+import { auth } from '../../Firebase/Firebase.config';
 
 const Register = () => {
     const { createUser } = useAuth();
@@ -19,7 +21,18 @@ const Register = () => {
         }
 
         createUser(email, password)
-            .then(res => console.log(res.user))
+            .then(res => {
+                updateProfile(auth.currentUser,{
+                    displayName:name,
+                    photoURL:url
+                })
+                .then(res=>{
+
+                })
+                .catch(err=>{
+                    
+                })
+            })
             .catch(err => console.log(err.message))
     }
 
