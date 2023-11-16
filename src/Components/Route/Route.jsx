@@ -11,48 +11,49 @@ import Contact from '../Contact/Contact';
 import Blog from '../Blog/Blog';
 import Root from '../../Root';
 import NotFound from '../NotFound';
+import PrivetRoute from "../../PrivetRoute/PrivetRoute";
 
 const url = 'https://my-json-server.typicode.com/faarhaan10/react-sunglasses/sunglasses';
 const Route = createBrowserRouter([
     {
         path: "/",
         element: <Root></Root>,
-        errorElement: <NotFound/>,
+        errorElement: <NotFound />,
         children: [
             {
                 path: '/home',
-                element: <Home/>,
+                element: <Home />,
                 loader: async () => (fetch(url))
             },
             {
                 path: '/products',
-                element: <Products/>,
+                element: <Products />,
                 loader: async () => (fetch(url))
             },
             {
                 path: '/product/:id',
-                element: <ProductDetail/>,
+                element: <PrivetRoute><ProductDetail /></PrivetRoute>,
                 loader: async ({ params }) => (fetch(`${url}/${params.id}`))
             },
             {
                 path: '/about',
-                element: <About/>
+                element: <About />
             },
             {
                 path: '/login',
-                element: <Login/>
+                element: <Login />
             },
             {
                 path: '/register',
-                element: <Register/>
+                element: <Register />
             },
             {
                 path: '/contact',
-                element: <Contact/>
+                element: <Contact />
             },
             {
                 path: '/blog',
-                element: <Blog/>
+                element: <Blog />
             },
         ]
     },

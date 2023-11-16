@@ -1,10 +1,11 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import SocialLogin from './SocialLogin';
 import { Helmet } from 'react-helmet-async';
 import useAuth from '../../Hooks/useAuth';
 
 const Login = () => {
-    const { login } = useAuth()
+    const { login } = useAuth();
+    const navigate = useNavigate();
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -19,6 +20,9 @@ const Login = () => {
         login(email, password)
             .then(res => console.log(res.user))
             .catch(err => console.log(err.message))
+
+            navigate('/home');
+        
     }
 
 

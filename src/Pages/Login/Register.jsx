@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import SocialLogin from './SocialLogin';
 import { Helmet } from 'react-helmet-async';
 import useAuth from './../../Hooks/useAuth';
@@ -7,6 +7,7 @@ import { auth } from '../../Firebase/Firebase.config';
 
 const Register = () => {
     const { createUser } = useAuth();
+    const navigate = useNavigate();
 
     const handleCreateUser = (e) => {
         e.preventDefault();
@@ -21,19 +22,22 @@ const Register = () => {
         }
 
         createUser(email, password)
-            .then(res => {
+            .then((res) => {
                 updateProfile(auth.currentUser,{
                     displayName:name,
                     photoURL:url
                 })
-                .then(res=>{
+                .then((res)=>{
 
                 })
                 .catch(err=>{
-                    
+
                 })
+            
             })
             .catch(err => console.log(err.message))
+
+           navigate('/home')
     }
 
     return (
